@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Goshen Concerns Limited | Business Centre & Computer Training</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #0a3d2e;
+    --green-mid: #145740;
+    --green-light: #1e7a58;
+    --gold: #c9a84c;
+    --gold-light: #e2c47a;
+    --cream: #fdf6ec;
+    --white: #ffffff;
+    --text-dark: #0d1f18;
+    --text-mid: #3a5248;
+    --text-muted: #6b8c7e;
+    --border: rgba(201,168,76,0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: rgba(10,61,46,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 6vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 68px;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .nav-logo-icon {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--green);
+    flex-shrink: 0;
+  }
+
+  .nav-logo-text {
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--white);
+    line-height: 1.2;
+    letter-spacing: 0.5px;
+  }
+
+  .nav-logo-text span {
+    display: block;
+    font-size: 10px;
+    color: var(--gold-light);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold-light); }
+
+  .nav-cta {
+    background: var(--gold);
+    color: var(--green) !important;
+    padding: 8px 20px;
+    border-radius: 4px;
+    font-weight: 600 !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--gold-light) !important; color: var(--green) !important; }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .hamburger span {
+    width: 24px; height: 2px;
+    background: var(--white);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  /* ─── HERO ─── */
+  #home {
+    min-height: 100vh;
+    background: var(--green);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 100px 6vw 60px;
+  }
+
+  .hero-pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(201,168,76,0.04) 0, rgba(201,168,76,0.04) 1px, transparent 0, transparent 50%);
+    background-size: 30px 30px;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 680px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 6px 16px;
+    margin-bottom: 32px;
+  }
+
+  .hero-badge-dot {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.4); }
+  }
+
+  .hero-badge span {
+    font-size: 12px;
+    color: var(--gold-light);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 6vw, 76px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.05;
+    margin-bottom: 24px;
+  }
+
+  .hero-title em {
+    font-style: normal;
+    color: var(--gold);
+  }
+
+  .hero-desc {
+    font-size: 17px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.7;
+    max-width: 520px;
+    margin-bottom: 40px;
+    font-weight: 300;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--green);
+    padding: 14px 32px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.3px;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(201,168,76,0.3);
+  }
+
+  .btn-outline {
+    border: 1px solid rgba(255,255,255,0.3);
+    color: var(--white);
+    padding: 14px 32px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--gold);
+    color: var(--gold-light);
+  }
+
+  .hero-stats {
+    position: absolute;
+    bottom: 60px;
+    right: 6vw;
+    display: flex;
+    gap: 40px;
+    z-index: 2;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* ─── SECTIONS COMMON ─── */
+  section {
+    padding: 90px 6vw;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .section-title.light { color: var(--white); }
+
+  .section-desc {
+    font-size: 16px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 560px;
+    font-weight: 300;
+  }
+
+  .section-desc.light { color: rgba(255,255,255,0.6); }
+
+  .section-header {
+    margin-bottom: 56px;
+  }
+
+  /* ─── SERVICES ─── */
+  #services {
+    background: var(--white);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .service-card {
+    background: var(--white);
+    padding: 36px 32px;
+    transition: background 0.2s;
+    position: relative;
+  }
+
+  .service-card:hover {
+    background: var(--cream);
+  }
+
+  .service-icon {
+    width: 48px; height: 48px;
+    background: linear-gradient(135deg, rgba(10,61,46,0.08), rgba(10,61,46,0.04));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .service-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    letter-spacing: 0.3px;
+  }
+
+  .service-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .price-tag {
+    display: inline-block;
+    background: rgba(201,168,76,0.12);
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--green);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 100px;
+    letter-spacing: 0.3px;
+  }
+
+  /* ─── PRICE LIST ─── */
+  #pricing {
+    background: var(--cream);
+  }
+
+  .price-table {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .price-table-header {
+    background: var(--green);
+    padding: 20px 32px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+  }
+
+  .price-table-header span {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+  }
+
+  .price-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+    padding: 18px 32px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    align-items: center;
+    transition: background 0.15s;
+  }
+
+  .price-row:last-child { border-bottom: none; }
+  .price-row:hover { background: var(--cream); }
+
+  .price-row-name {
+    font-size: 15px;
+    color: var(--text-dark);
+    font-weight: 400;
+  }
+
+  .price-row-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .price-row-amount {
+    font-family: 'Oswald', sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--green);
+    white-space: nowrap;
+  }
+
+  .price-varies {
+    color: var(--text-muted);
+    font-size: 13px;
+    font-style: italic;
+  }
+
+  /* ─── TRAINING ─── */
+  #training {
+    background: var(--green);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #training::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(45deg, rgba(201,168,76,0.03) 0, rgba(201,168,76,0.03) 1px, transparent 0, transparent 50%);
+    background-size: 30px 30px;
+  }
+
+  .training-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .course-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 12px;
+    padding: 32px 28px;
+    transition: all 0.25s;
+    cursor: pointer;
+  }
+
+  .course-card:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(201,168,76,0.5);
+    transform: translateY(-3px);
+  }
+
+  .course-icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .course-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 10px;
+    letter-spacing: 0.3px;
+  }
+
+  .course-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.6;
+  }
+
+  .training-enroll {
+    position: relative;
+    z-index: 1;
+    margin-top: 48px;
+    text-align: center;
+  }
+
+  /* ─── NIN ─── */
+  #nin {
+    background: var(--white);
+  }
+
+  .nin-inner {
+    background: linear-gradient(135deg, var(--green) 0%, var(--green-mid) 100%);
+    border-radius: 16px;
+    padding: 60px 48px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .nin-inner::after {
+    content: 'NIN';
+    position: absolute;
+    right: 180px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 160px;
+    font-weight: 700;
+    color: rgba(201,168,76,0.06);
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .nin-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 100px;
+    padding: 6px 16px;
+    margin-bottom: 20px;
+  }
+
+  .nin-badge span {
+    font-size: 11px;
+    color: var(--gold-light);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .nin-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .nin-desc {
+    font-size: 15px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.7;
+    max-width: 460px;
+  }
+
+  .nin-cta {
+    flex-shrink: 0;
+    text-align: center;
+  }
+
+  /* ─── ABOUT ─── */
+  #about {
+    background: var(--cream);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .about-visual {
+    position: relative;
+  }
+
+  .about-box {
+    background: var(--green);
+    border-radius: 12px;
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-box::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(45deg, rgba(201,168,76,0.05) 0, rgba(201,168,76,0.05) 1px, transparent 0, transparent 50%);
+    background-size: 20px 20px;
+  }
+
+  .about-box-quote {
+    position: relative;
+    z-index: 1;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .about-box-attr {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .about-box-attr-line {
+    width: 32px; height: 1px;
+    background: var(--gold);
+  }
+
+  .about-box-attr span {
+    font-size: 12px;
+    color: var(--gold-light);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .about-accent {
+    position: absolute;
+    bottom: -20px; right: -20px;
+    width: 120px; height: 120px;
+    background: var(--gold);
+    border-radius: 12px;
+    opacity: 0.12;
+  }
+
+  .about-content p {
+    font-size: 16px;
+    color: var(--text-mid);
+    line-height: 1.8;
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+
+  .about-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .highlight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .highlight-icon {
+    width: 36px; height: 36px;
+    background: rgba(201,168,76,0.12);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .highlight-text strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 2px;
+  }
+
+  .highlight-text span {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* ─── CONTACT ─── */
+  #contact {
+    background: var(--green);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #contact::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(45deg, rgba(201,168,76,0.03) 0, rgba(201,168,76,0.03) 1px, transparent 0, transparent 50%);
+    background-size: 30px 30px;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 40px;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .contact-item-icon {
+    width: 44px; height: 44px;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .contact-item-label {
+    font-size: 11px;
+    color: var(--gold-light);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .contact-item-value {
+    font-size: 15px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.5;
+  }
+
+  .contact-form-box {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 12px;
+    padding: 40px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: rgba(255,255,255,0.3);
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: rgba(201,168,76,0.5);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .form-group select option {
+    background: var(--green);
+    color: var(--white);
+  }
+
+  .btn-submit {
+    width: 100%;
+    background: var(--gold);
+    color: var(--green);
+    border: none;
+    padding: 14px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+  }
+
+  .btn-submit:hover {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--text-dark);
+    padding: 40px 6vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-logo {
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--white);
+    letter-spacing: 0.5px;
+  }
+
+  .footer-logo span {
+    display: block;
+    font-size: 10px;
+    color: var(--gold);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--gold-light); }
+
+  .footer-copy {
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+  }
+
+  /* ─── MOBILE NAV ─── */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 68px; left: 0; right: 0;
+    background: var(--green);
+    border-top: 1px solid var(--border);
+    padding: 24px 6vw;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 999;
+  }
+
+  .mobile-menu.open { display: flex; }
+
+  .mobile-menu a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+
+    .hero-stats {
+      position: static;
+      margin-top: 48px;
+      gap: 32px;
+    }
+
+    #home {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .about-grid,
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .nin-inner {
+      grid-template-columns: 1fr;
+      padding: 40px 28px;
+    }
+
+    .nin-inner::after { display: none; }
+
+    .nin-cta { text-align: left; }
+
+    .price-row { padding: 16px 20px; }
+    .price-table-header { padding: 16px 20px; }
+
+    footer {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .footer-links { flex-wrap: wrap; gap: 16px; }
+
+    .contact-form-box { padding: 28px 20px; }
+    .about-box { padding: 32px 28px; }
+  }
+
+  /* ─── SCROLL ANIMATIONS ─── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">
+    <div class="nav-logo-icon">G</div>
+    <div class="nav-logo-text">
+      Goshen Concerns
+      <span>Limited</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#training">Training</a></li>
+    <li><a href="#nin">NIN</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home" onclick="closeMenu()">Home</a>
+  <a href="#services" onclick="closeMenu()">Services</a>
+  <a href="#pricing" onclick="closeMenu()">Pricing</a>
+  <a href="#training" onclick="closeMenu()">Training</a>
+  <a href="#nin" onclick="closeMenu()">NIN Registration</a>
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-pattern"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      <span>Jos, Plateau State · Old Airport Junction</span>
+    </div>
+    <h1 class="hero-title">
+      Your Trusted<br>
+      <em>Business Centre</em><br>
+      in Jos
+    </h1>
+    <p class="hero-desc">
+      Professional printing, scanning, computer training, NIN registration and more — all under one roof at Goshen Concerns Limited.
+    </p>
+    <div class="hero-actions">
+      <a href="#services" class="btn-primary">View Our Services</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">10+</div>
+      <div class="stat-label">Years in Business</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Courses Offered</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">12+</div>
+      <div class="stat-label">Services Available</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-header fade-up">
+    <span class="section-label">What We Offer</span>
+    <h2 class="section-title">Our Services</h2>
+    <p class="section-desc">From document printing to government registrations — we handle everything you need, professionally and affordably.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card fade-up">
+      <div class="service-icon">🖨️</div>
+      <div class="service-title">Printing</div>
+      <p class="service-desc">A4 black & white printing for documents, forms, flyers and more. A3 and colour options also available.</p>
+      <span class="price-tag">A4 B&W from ₦100</span>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon">📄</div>
+      <div class="service-title">Photocopying</div>
+      <p class="service-desc">Fast and accurate photocopying for all your document duplication needs. A3 and colour options also available.</p>
+      <span class="price-tag">A4 B&W from ₦50</span>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon">📝</div>
+      <div class="service-title">Typing & Printing</div>
+      <p class="service-desc">Bring your handwritten work — we type, format and print it professionally for you.</p>
+      <span class="price-tag">₦300</span>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon">🔍</div>
+      <div class="service-title">Scanning</div>
+      <p class="service-desc">High-quality document scanning to digital format, ready for email or USB delivery.</p>
+      <span class="price-tag">₦100</span>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon">🏷️</div>
+      <div class="service-title">Lamination</div>
+      <p class="service-desc">Standard and pocket-sized ID card lamination to protect your important documents.</p>
+      <span class="price-tag">From ₦100</span>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon">📸</div>
+      <div class="service-title">Passport Photos</div>
+      <p class="service-desc">Professional passport-sized photo editing and printing for all official use.</p>
+      <span class="price-tag">₦1,000</span>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon">📎</div>
+      <div class="service-title">Binding</div>
+      <p class="service-desc">A4 and A3 document binding for reports, theses, proposals and official documents.</p>
+      <span class="price-tag">Price Varies</span>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon">🎨</div>
+      <div class="service-title">Letterhead Design</div>
+      <p class="service-desc">Professional letterhead and business stationery design for companies and individuals.</p>
+      <span class="price-tag">₦1,000</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-header fade-up">
+    <span class="section-label">Transparent Rates</span>
+    <h2 class="section-title">Our Price List</h2>
+    <p class="section-desc">No hidden charges. What you see is what you pay.</p>
+  </div>
+  <div class="price-table fade-up">
+    <div class="price-table-header">
+      <span>Service</span>
+      <span>Price</span>
+    </div>
+    <div class="price-row">
+      <div>
+        <div class="price-row-name">A4 Black & White Photocopy</div>
+      </div>
+      <div class="price-row-amount">₦50</div>
+    </div>
+    <div class="price-row">
+      <div>
+        <div class="price-row-name">A4 Black & White Printing</div>
+      </div>
+      <div class="price-row-amount">₦100</div>
+    </div>
+    <div class="price-row">
+      <div>
+        <div class="price-row-name">A4 Coloured Printing & Photocopy</div>
+      </div>
+      <div class="price-row-amount">₦200</div>
+    </div>
+    <div class="price-row">
+      <div>
+        <div class="price-row-name">Typing & Printing</div>
+      </div>
+      <div class="price-row-amount">₦300</div>
+    </div>
+    <div class="price-row">
+      <div>
+        <div class="price-row-name">Designing of Letterhead</div>
+      </div>
+      <div class="price-row-amount">₦1,000</div>
+    </div>
+    <div class="price-row">
+      <div>
+        <div class="price-row-name">A3 Black & White Printing & Photocopy</div>
+      </div>
+      <div class="price-row-amount">₦200</div>
+    </div>
+    <div class="price-row">
+      <div>
+        <div class="price-row-name">A3 Coloured Printing & Photocopy</div>
+      </div>
+      <div class="price-row-amount">₦300</div>
+    </div>
+    <div class="price-row">
+      <div>
+        <div class="price-row-name">A3 Binding</div>
+      </div>
+      <div class="price-row-amount price-varies">Varies</div>
+    </div>
+    <div class="price-row">
+      <div>
+        <div class="price-row-name">A4 Binding</div>
+      </div>
+      <div class="price-row-amount price-varies">Varies</div>
+    </div>
+    <div class="price-row">
+      <div>
+        <div class="price-row-name">Lamination</div>
+      </div>
+      <div class="price-row-amount">₦200</div>
+    </div>
+    <div class="price-row">
+      <div>
+        <div class="price-row-name">Pocket-Sized ID Card Lamination</div>
+      </div>
+      <div class="price-row-amount">₦100</div>
+    </div>
+    <div class="price-row">
+      <div>
+        <div class="price-row-name">Scanning</div>
+      </div>
+      <div class="price-row-amount">₦100</div>
+    </div>
+    <div class="price-row">
+      <div>
+        <div class="price-row-name">Passport Photo</div>
+      </div>
+      <div class="price-row-amount">₦1,000</div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAINING -->
+<section id="training">
+  <div class="section-header fade-up">
+    <span class="section-label">Skill Development</span>
+    <h2 class="section-title light">Computer Training</h2>
+    <p class="section-desc light">Practical, hands-on training designed to equip you with real digital skills for today's world.</p>
+  </div>
+  <div class="training-grid">
+    <div class="course-card fade-up">
+      <span class="course-icon">💻</span>
+      <div class="course-title">Basic Computer Training</div>
+      <p class="course-desc">Learn the fundamentals — typing, file management, internet use, Microsoft Office and more.</p>
+    </div>
+    <div class="course-card fade-up">
+      <span class="course-icon">🎨</span>
+      <div class="course-title">Graphic Design</div>
+      <p class="course-desc">Create stunning visuals, logos, flyers and print designs using industry-standard tools.</p>
+    </div>
+    <div class="course-card fade-up">
+      <span class="course-icon">🎬</span>
+      <div class="course-title">Mobile Video Editing</div>
+      <p class="course-desc">Edit professional-quality videos right from your phone — perfect for social media content creators.</p>
+    </div>
+    <div class="course-card fade-up">
+      <span class="course-icon">🖥️</span>
+      <div class="course-title">Computer Services</div>
+      <p class="course-desc">Learn how to handle common computer tasks, maintenance and troubleshooting confidently.</p>
+    </div>
+    <div class="course-card fade-up">
+      <span class="course-icon">🌐</span>
+      <div class="course-title">Web Design</div>
+      <p class="course-desc">Build beautiful websites from scratch — a high-demand skill for careers and freelancing.</p>
+    </div>
+  </div>
+  <div class="training-enroll fade-up">
+    <a href="#contact" class="btn-primary">Enroll Your Child Today</a>
+  </div>
+</section>
+
+<!-- NIN -->
+<section id="nin" style="background: var(--cream);">
+  <div class="nin-inner fade-up">
+    <div>
+      <div class="nin-badge">
+        <span>🪪 Government Service</span>
+      </div>
+      <h2 class="nin-title">NIN Registration<br>Done Here</h2>
+      <p class="nin-desc">
+        We assist with National Identification Number (NIN) registration and related services. Save yourself the stress — walk in and let us handle it for you, quickly and professionally.
+      </p>
+    </div>
+    <div class="nin-cta">
+      <a href="https://wa.me/2348060770090" target="_blank" class="btn-primary" style="white-space:nowrap;">WhatsApp Us</a>
+      <p style="font-size:12px; color:rgba(255,255,255,0.4); margin-top:12px; letter-spacing:0.3px;">Walk-ins also welcome</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-visual fade-up">
+      <div class="about-box">
+        <div class="about-box-quote">
+          "We are committed to providing quality business centre services and computer education to the people of Jos and beyond."
+        </div>
+        <div class="about-box-attr">
+          <div class="about-box-attr-line"></div>
+          <span>Goshen Concerns Limited</span>
+        </div>
+      </div>
+      <div class="about-accent"></div>
+    </div>
+    <div class="about-content fade-up">
+      <span class="section-label">Our Story</span>
+      <h2 class="section-title">About Goshen Concerns</h2>
+      <p>Goshen Concerns Limited has been a trusted business centre in Jos, Plateau State for many years. Located at Old Airport Junction, we have served thousands of individuals, students, businesses and organizations with professional printing, documentation and digital services.</p>
+      <p>Beyond business centre services, we are passionate about digital literacy and have trained hundreds of students in computer skills that have opened doors for careers and self-employment.</p>
+      <div class="about-highlights">
+        <div class="highlight-item">
+          <div class="highlight-icon">📍</div>
+          <div class="highlight-text">
+            <strong>Our Location</strong>
+            <span>Old Airport Junction, Jos, Plateau State</span>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-icon">📞</div>
+          <div class="highlight-text">
+            <strong>Phone (Calls)</strong>
+            <span>+234 906 654 2201</span>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-icon">💬</div>
+          <div class="highlight-text">
+            <strong>WhatsApp</strong>
+            <span>+234 806 077 0090</span>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-icon">✉️</div>
+          <div class="highlight-text">
+            <strong>Email</strong>
+            <span>goshenconcerns@gmail.com</span>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-icon">🕐</div>
+          <div class="highlight-text">
+            <strong>Working Hours</strong>
+            <span>Monday – Saturday: 8:00 AM – 7:00 PM<br>Sunday: 12:00 PM – 7:00 PM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="fade-up">
+      <span class="section-label">Reach Us</span>
+      <h2 class="section-title light">Get In Touch</h2>
+      <p class="section-desc light">Have a question, need a service or want to enroll for training? We'd love to hear from you.</p>
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div>
+            <div class="contact-item-label">Address</div>
+            <div class="contact-item-value">Old Airport Junction, Jos, Plateau State</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📞</div>
+          <div>
+            <div class="contact-item-label">Phone (Calls)</div>
+            <div class="contact-item-value">+234 906 654 2201</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">💬</div>
+          <div>
+            <div class="contact-item-label">WhatsApp</div>
+            <div class="contact-item-value">+234 806 077 0090</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">✉️</div>
+          <div>
+            <div class="contact-item-label">Email</div>
+            <div class="contact-item-value">goshenconcerns@gmail.com</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">🕐</div>
+          <div>
+            <div class="contact-item-label">Working Hours</div>
+            <div class="contact-item-value">Mon – Sat: 8:00 AM – 7:00 PM<br>Sun: 12:00 PM – 7:00 PM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form-box fade-up">
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="e.g. Amaka Johnson">
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" placeholder="+234...">
+      </div>
+      <div class="form-group">
+        <label>Service Needed</label>
+        <select>
+          <option value="">Select a service...</option>
+          <option>Printing / Photocopy</option>
+          <option>Typing & Printing</option>
+          <option>Scanning</option>
+          <option>Lamination</option>
+          <option>Binding</option>
+          <option>Passport Photo</option>
+          <option>NIN Registration</option>
+          <option>Computer Training Enrollment</option>
+          <option>Letterhead Design</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message (Optional)</label>
+        <textarea placeholder="Tell us more about what you need..."></textarea>
+      </div>
+      <button class="btn-submit" onclick="handleSubmit(this)">Send Message</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    Goshen Concerns Limited
+    <span>Business Centre · Jos, Plateau State</span>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#training">Training</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 Goshen Concerns Ltd. All rights reserved.</div>
+</footer>
+
+<script>
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Form submit mock
+  function handleSubmit(btn) {
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = '✓ Message Sent!';
+      btn.style.background = '#1e7a58';
+      btn.style.color = '#fff';
+    }, 1500);
+  }
+
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 100;
+      if (window.scrollY >= sectionTop) current = section.getAttribute('id');
+    });
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--gold-light)' : '';
+    });
+  });
+</script>
+</body>
+</html>
