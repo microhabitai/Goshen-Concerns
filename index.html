@@ -1451,15 +1451,32 @@
 
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-  // Form submit mock
+  // Form submit via mailto
   function handleSubmit(btn) {
-    btn.textContent = 'Sending...';
-    btn.disabled = true;
+    const name = document.querySelector('input[type="text"]').value.trim();
+    const phone = document.querySelector('input[type="tel"]').value.trim();
+    const service = document.querySelector('select').value;
+    const message = document.querySelector('textarea').value.trim();
+
+    if (!name || !phone || !service) {
+      alert('Please fill in your name, phone number and service needed.');
+      return;
+    }
+
+    const subject = 'Goshen Concerns Enquiry - ' + service;
+    const body = 'Hello Goshen Concerns,' + String.fromCharCode(10) + String.fromCharCode(10) + 'Name: ' + name + String.fromCharCode(10) + 'Phone: ' + phone + String.fromCharCode(10) + 'Service Needed: ' + service + (message ? String.fromCharCode(10) + String.fromCharCode(10) + 'Message: ' + message : '') + String.fromCharCode(10) + String.fromCharCode(10) + 'Sent via Goshen Concerns website.';
+
+    const mailto = 'mailto:goshenconcerns@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    window.location.href = mailto;
+
+    btn.textContent = 'Opening Gmail...';
+    btn.style.background = '#1e7a58';
+    btn.style.color = '#fff';
     setTimeout(() => {
-      btn.textContent = '✓ Message Sent!';
-      btn.style.background = '#1e7a58';
-      btn.style.color = '#fff';
-    }, 1500);
+      btn.textContent = 'Send Message';
+      btn.style.background = '';
+      btn.style.color = '';
+    }, 3000);
   }
 
   // Active nav link on scroll
